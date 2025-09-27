@@ -2,6 +2,10 @@
 
 This project implements a **timer-driven finite state machine (FSM)** on the Arty A7-100 FPGA using a MicroBlaze soft processor. It simulates a pedestrian/cyclist crossing signal with **green** and **red** LEDs, flashing phases, and button input. The program uses **AXI GPIO** and an **AXI Timer (generate mode)** to control LEDs and timing without busy-loops.
 
+> **Status:** *This project is under active development.*  
+> The current version uses a **polling approach** for the AXI Timer’s interrupt flag.  
+> The **next implementation** will transition to a fully **interrupt-driven MicroBlaze system**, removing polling from the main loop and handling timer events via an ISR for improved efficiency.
+
 ## Overview
 
 - **Platform:** Digilent Arty A7-100T FPGA  
@@ -27,6 +31,7 @@ All timing is handled by the AXI Timer’s interrupt flag, polled in software.
 - **Hardware abstraction:** Helper functions to turn green/red LEDs on or off.  
 - **Clean FSM structure:** `FSM_tick()` updates state and actions every main-loop iteration.  
 - **Configurable durations:** `HALFSEC_COUNT` defines tick length (here 0.5 s at 81.247 MHz).  
+- **Future work:** Transition to **interrupt-driven** timer events for improved responsiveness.
 
 ## Hardware Mapping
 
@@ -80,3 +85,12 @@ Push buttons = input.
 - Change `flashCounter` or `redTicks` to modify flash/solid durations.  
 - Expand LED patterns or add other signals as needed.
 
+## Roadmap
+
+- **Current:** Polling-based timer events.
+- **Next:** Implement **interrupt-driven** timer handling using MicroBlaze ISRs.
+- **Future:** Extend to multi-button inputs, configurable timing via switches, or integration with other peripherals.
+
+---
+
+This project demonstrates how to replace dummy delays with an AXI Timer in MicroBlaze applications, making timing predictable and freeing CPU cycles for other tasks. The upcoming interrupt-driven version will further improve responsiveness and design quality.
