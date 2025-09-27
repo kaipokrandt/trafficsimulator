@@ -62,7 +62,7 @@ Push buttons = input.
    - After the cycle, the FSM returns to green.
 
 5. **Serial output:**  
-   - Connect to the MicroBlaze UART at 115200 bps.  
+   - Connect to the MicroBlaze UART at 9600 bps.  
    - The program prints state transitions and flash events via `xil_printf`.
 
 ## Code Structure
